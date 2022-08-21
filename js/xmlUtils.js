@@ -77,7 +77,7 @@ const xmlUtils = {
 			var pathEls = [];
 			(function getPath(p) {
 				if (p.nodeType != 9) {
-					if (this.qName(p, doc) != t) {
+					if (xmlUtils.qName(p, doc) != t) {
 						pathEls.unshift(xmlUtils.qName(p, doc));
 						getPath(p.parentNode);
 

@@ -220,39 +220,40 @@ xsltBldrApp.processDrag = function(targetId) {
 		if (origin.parentNode.nodeType != 9 || !r) {
 			var parTemplMatch = xmlUtils.findTemplateParent(correspondingResultNode.parentNode, "");
 
-			var templ2bApplied = xmlUtils.getTempl2bApplied(origin, parTemplMatch, (r != null), explodedSrcId[1] ? explodedSrcId[1] : null);
+			var templ2bApplied = xmlUtils.getTempl2bApplied(app.dragOrigin, parTemplMatch, (r != null), explodedSrcId[1] ? explodedSrcId[1] : null, app.resultXslt);
 
 
-			java_vtn_mode = java_vtn.className.indexOf("depressed") != -1;
+			//java_vtn_mode = java_vtn.className.indexOf("depressed") != -1;
 
 			//java value to node mode
-			if (java_vtn_mode) {
-				var pkg = prompt("What is the fully qualified name of your static class? (e.g. 'com.bng_mig.interfaces.Pool'))");
-				if (!pkg) return;
-				var methName = prompt("What is the name of your method?");
-				if (!methName) return;
-				var prefix = freeIndex(xsltBldrApp.resultXslt);
+			// if (java_vtn_mode) {
+			// 	var pkg = prompt("What is the fully qualified name of your static class? (e.g. 'com.bng_mig.interfaces.Pool'))");
+			// 	if (!pkg) return;
+			// 	var methName = prompt("What is the name of your method?");
+			// 	if (!methName) return;
+			// 	var prefix = freeIndex(xsltBldrApp.resultXslt);
 
-				app.resultXslt.documentElement.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:ns" + prefix, pkg);
-				app.addPref2bExcluded("extension-element-prefixes", "ns" + prefix);
+			// 	app.resultXslt.documentElement.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:ns" + prefix, pkg);
+			// 	app.addPref2bExcluded("extension-element-prefixes", "ns" + prefix);
 
-				var aplTempl = xsltTagFactory(
+			// 	var aplTempl = xsltTagFactory(
+			// 		{
+			// 			name: "apply-templates",
+			// 			atrs: [["select", templ2bApplied]]
+			// 		});
+			// 	correspondingResultNode.parentNode.insertBefore(aplTempl,
+			// 		correspondingResultNode);
+
+			// 	templ.appendChild(app.xsltTagFactory({ name: "copy-of", atrs: [["select", prefix + ":" + methName + "(.)"]] }));
+			// 	app.resultXslt.documentElement.appendChild(templ);
+			// 	correspondingResultNode.remove();
+			// 	// target is a node container
+			// } else
+			if (targetNode.childNodes[0].nodeType == 1) {
+				var aplTempl = app.xsltTagFactory(
 					{
 						name: "apply-templates",
-						atrs: [["select", templ2bApplied]]
-					});
-				correspondingResultNode.parentNode.insertBefore(aplTempl,
-					correspondingResultNode);
-
-				templ.appendChild(app.xsltTagFactory({ name: "copy-of", atrs: [["select", prefix + ":" + methName + "(.)"]] }));
-				app.resultXslt.documentElement.appendChild(templ);
-				correspondingResultNode.remove();
-				// target is a node container
-			} else if (targetNode.childNodes[0].nodeType == 1) {
-				var aplTempl = xsltTagFactory(
-					{
-						name: "apply-templates",
-						atrs: [["select", templ2bApplied]]
+						atrs: [["select", app.templ2bApplied]]
 					});
 				correspondingResultNode.parentNode.insertBefore(aplTempl,
 					correspondingResultNode);
@@ -261,11 +262,11 @@ xsltBldrApp.processDrag = function(targetId) {
 				app.resultXslt.documentElement.appendChild(templ);
 			} // target is not a node container, but a value container
 			else {
-				var correspondingResultNode = xsltBldrApp.resultXslt.getElementById(targetId);
+				var correspondingResultNode = app.resultXslt.getElementById(targetId);
 				while (correspondingResultNode.hasChildNodes())
 					correspondingResultNode.childNodes[0].remove();
-				var atrs = [["select", templ2bApplied]];
-				correspondingResultNode.appendChild(xsltTagFactory({ name: "value-of", atrs }));
+				var atrs = [["select", app.templ2bApplied]];
+				correspondingResultNode.appendChild(app.xsltTagFactory({ name: "value-of", atrs }));
 			}
 		}
 		app.markAsDone(targetId, srcId);
