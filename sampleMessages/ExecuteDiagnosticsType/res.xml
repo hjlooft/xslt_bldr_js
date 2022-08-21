@@ -1,0 +1,37 @@
+<ns5:ExecuteDiagnosticsCallbackType xmlns= "http://schemas.komlefom.net/csdg_v01.01" xmlns:ns2= "http://services.sdeu.komlefom.net/ServAndResMgmt/TestAndDiagno/DiagnosticsManagementConsumer_v02.00/types" xmlns:ns3= "http://system-services.s-home.komlefom.de/ServiceManagement/OIS_Services_v01.00/common" xmlns:ns4= "http://system-services.s-home.komlefom.de/ServiceManagement/ServiceTestAndDiagnostics/DiagnosticsManagement_v02.00/types" xmlns:ns5= "uri">
+    <ns2:context>
+        <technicalContext>
+            <from>de.komlefom.ngssm.oss.Opscene.Opscene:NBI</from>
+            <routingInfo>de.komlefom.ngssm.oss.Opscene.Opscene:NBI:DiagnosticsManagementConsumer_HPSA_RMK</routingInfo>
+            <messageId>82495d7d-5079-408b-a787-da4c484b99e5</messageId>
+            <currentSenderTimestampUTC>2015-04-30T10:23:10.267Z</currentSenderTimestampUTC>
+            <expiryOffsetInMillis>120000</expiryOffsetInMillis>
+        </technicalContext>
+        <businessContext>
+            <processId>soapUi-AN_ANCP_STATUS</processId>
+            <processTypeId>soapUi-1</processTypeId>
+        </businessContext>
+    </ns2:context>
+    <ns2:data>
+        <ns4:executeDiagnosticsCallback>
+            <ns4:messageID>
+                <ns3:value>797a39c2-dd2b-453d-815b-9e44124078f9</ns3:value>
+                <ns3:sequence>1</ns3:sequence>
+            </ns4:messageID>
+            <ns4:diagnostic>
+                <ns3:specification>
+                    <ns3:specificationName>Diagnostic Response Spec</ns3:specificationName>
+                    <ns3:specificationID>Diagnostic Response Spec</ns3:specificationID>
+                    <ns3:characteristic>
+                        <ns3:characteristicID>SpecificationType</ns3:characteristicID>
+                        <ns3:characteristicValue>Diagnostic</ns3:characteristicValue>
+                    </ns3:characteristic>
+                    <ns3:characteristic>
+                        <ns3:characteristicID>TestResponse</ns3:characteristicID>
+                        <ns3:characteristicValue>Good</ns3:characteristicValue>
+                    </ns3:characteristic>
+                </ns3:specification>
+            </ns4:diagnostic>
+        </ns4:executeDiagnosticsCallback>
+    </ns2:data>
+</ns5:ExecuteDiagnosticsCallbackType>

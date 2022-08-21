@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mynationCreateResponse>
+    <control>
+        <system>1</system>
+        <version>1</version>
+        <transid>$transid$</transid>
+        <timestamp>$timestamp$</timestamp>
+    </control>
+    <data>
+        <endsu>$endsu$</endsu>
+        <idont>
+            <keya>$keya$</keya>
+            <keyb>$keyb$</keyb>
+            <result>0</result>
+        </idont>
+    </data>
+</mynationCreateResponse>

@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<hello-world>
+  <greeter>an XSLT Programmer</greeter>
+  <greeting>Welcome to XSLT Fiddle!</greeting>
+</hello-world>

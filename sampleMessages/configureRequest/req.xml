@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:configureResponse xmlns:ns2="http://www.ericsson.com/mtop/cm/xsd/cc/v1-0" xmlns="http://www.tmforum.org/mtop/fmw/xsd/gen/v1" xmlns:ns4="http://www.tmforum.org/mtop/fmw/xsd/msg/v1" xmlns:ns3="http://www.tmforum.org/mtop/fmw/xsd/hdr/v1" xmlns:ns5="http://www.tmforum.org/mtop/fmw/xsd/cosd/v1" xmlns:ns6="http://www.tmforum.org/mtop/nrb/xsd/crmd/v1" xmlns:ns7="http://www.tmforum.org/mtop/fmw/xsd/nam/v1" xmlns:ns8="http://www.tmforum.org/mtop/fmw/xsd/comd/v1">
+    <ns2:vendorExtensions>
+        <nvsList>
+            <nvs>
+                <name>ARG_Script</name>
+                <value>Script : file:///opt/marconi/soi-scriptserver-utils/scripts/GNBMynation.ksh Arguments : $Request ARG_Script value$ Gefundene Values: $Gefundene Values$  =START-OSIC-ADTRAN-SCRIPT==================================================================================== REST= ANZAHL_CUSTOMER_CONFIGS=1080 =ZUSAMMENFASSUNG-OSIC-ADTRAN-SCRIPT==================================================================================== AnzSynchronisierterPortsVorMig=782;AnzSynchronisierterPortsNachMig=775;AnzPPPoESessionNachMig=781;AnzDHCPSessionsVorMig=50;AnzDHCPSessionsNachMig=5;AnzCustomerConfigsInRequest=2; =ENDE-OSIC-ADTRAN-SCRIPT==================================================================================== End time : Tue Dec 02 18:48:10 EET 2014</value>
+            </nvs>
+        </nvsList>
+    </ns2:vendorExtensions>
+</ns2:configureResponse>

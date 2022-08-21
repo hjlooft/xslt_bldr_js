@@ -1,0 +1,60 @@
+<ns5:ExecuteDiagnosticsType xmlns="http://schemas.komlefom.net/csdg_v01.01" xmlns:ns2="http://services.sdeu.komlefom.net/ServAndResMgmt/TestAndDiagno/DiagnosticsManagementProvider_v02.00/types" xmlns:ns3="http://system-services.s-home.komlefom.de/ServiceManagement/OIS_Services_v01.00/common" xmlns:ns4="http://system-services.s-home.komlefom.de/ServiceManagement/ServiceTestAndDiagnostics/DiagnosticsManagement_v02.00/types" xmlns:ns5="uri">
+    <ns2:context>
+        <technicalContext>
+            <from>de.komlefom.GNB.mynation.OpsceneGateway</from>
+            <routingInfo>Opscene.readAnAncpStatus</routingInfo>
+            <messageId>82495d7d-5079-408b-a787-da4c484b99e5</messageId>
+            <currentSenderTimestampUTC>2015-04-30T10:23:10.096Z</currentSenderTimestampUTC>
+            <expiryOffsetInMillis>60000</expiryOffsetInMillis>
+        </technicalContext>
+        <businessContext>
+            <processId>797a39c2-dd2b-453d-815b-9e44124078f9</processId>
+            <processTypeId>unknown_process_type</processTypeId>
+        </businessContext>
+    </ns2:context>
+    <ns2:data>
+        <ns4:executeDiagnostics>
+            <ns4:messageID>
+                <ns3:value>797a39c2-dd2b-453d-815b-9e44124078f9</ns3:value>
+            </ns4:messageID>
+            <ns4:diagnostic>
+                <ns3:specification>
+                    <ns3:specificationName>Diagnostic Spec</ns3:specificationName>
+                    <ns3:specificationID>Diagnostic Spec</ns3:specificationID>
+                    <ns3:characteristic>
+                        <ns3:characteristicID>SpecificationType</ns3:characteristicID>
+                        <ns3:characteristicValue>Diagnostic</ns3:characteristicValue>
+                    </ns3:characteristic>
+                    <ns3:characteristic>
+                        <ns3:characteristicID>TestName</ns3:characteristicID>
+                        <ns3:characteristicValue>READ_AN_ANCP_STATUS</ns3:characteristicValue>
+                    </ns3:characteristic>
+                    <ns3:characteristic>
+                        <ns3:characteristicID>TestInput</ns3:characteristicID>
+                        <ns3:characteristicValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                        <ns3:characteristic>
+                            <ns3:characteristicID>InputData</ns3:characteristicID>
+                            <ns3:characteristicValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                            <ns3:characteristic>
+                                <ns3:characteristicID>PortInformation</ns3:characteristicID>
+                                <ns3:characteristicValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                                <ns3:characteristic>
+                                    <ns3:characteristicID>PortInformation.endsuAccessNode</ns3:characteristicID>
+                                    <ns3:characteristicValue>49/2777/1023/7MA1</ns3:characteristicValue>
+                                </ns3:characteristic>
+                                <ns3:characteristic>
+                                    <ns3:characteristicID>PortInformation.slot</ns3:characteristicID>
+                                    <ns3:characteristicValue>2</ns3:characteristicValue>
+                                </ns3:characteristic>
+                                <ns3:characteristic>
+                                    <ns3:characteristicID>PortInformation.port</ns3:characteristicID>
+                                    <ns3:characteristicValue>1</ns3:characteristicValue>
+                                </ns3:characteristic>
+                            </ns3:characteristic>
+                        </ns3:characteristic>
+                    </ns3:characteristic>
+                </ns3:specification>
+            </ns4:diagnostic>
+        </ns4:executeDiagnostics>
+    </ns2:data>
+</ns5:ExecuteDiagnosticsType>

@@ -1,0 +1,19 @@
+<?xml version= "1.0" encoding= "UTF-8"?>
+<ns5:configureRequest xmlns= "http://www.tmforum.org/mtop/fmw/xsd/cosd/v1" xmlns:ns2= "http://www.tmforum.org/mtop/fmw/xsd/gen/v1" xmlns:ns3= "http://www.tmforum.org/mtop/nrb/xsd/crmd/v1" xmlns:ns4= "http://www.tmforum.org/mtop/fmw/xsd/nam/v1" xmlns:ns5= "http://www.ericsson.com/mtop/cm/xsd/cc/v1-0" xmlns:ns6= "http://www.tmforum.org/mtop/fmw/xsd/hdr/v1" xmlns:ns7= "http://www.tmforum.org/mtop/fmw/xsd/msg/v1" xmlns:ns8= "http://www.tmforum.org/mtop/fmw/xsd/comd/v1">
+    <ns5:configureData>
+        <vendorExtensions>
+            <ns2:nvsList>
+                <ns2:nvs>
+                    <ns2:name>ARG_Fail_Script</ns2:name>
+                    <ns2:value />
+                </ns2:nvs>
+                <ns2:nvs>
+                    <ns2:name>ARG_Script</ns2:name>
+                    <ns2:value>-endsuAN 49_2777_46_7MA1 -vendor ADTRAN -typAN MSAN -kennerAnnexB n -shdslLC n -dualhomed n  -line_1 1;1;DEU.DTGmbH.a277746;9;1</ns2:value>
+                </ns2:nvs>
+            </ns2:nvsList>
+        </vendorExtensions>
+        <ns5:script>GNB2a_Mynation_AN.xml</ns5:script>
+        <ns5:action>Execution</ns5:action>
+    </ns5:configureData>
+</ns5:configureRequest>

@@ -1,0 +1,4 @@
+<ns2:ProduktinstanzdatenExportierenRequest xmlns="http://www.komlefom.de/proxlef/mixtool/basetypes" xmlns:ns2="http://www.komlefom.de/proxlef/mixtool">
+    <messageCorrelationId>429dd4c1-0404-4512-894c-c838ca6c2ebc</messageCorrelationId>
+    <ns2:endsuAN>49/2777/40/7MA1</ns2:endsuAN>
+</ns2:ProduktinstanzdatenExportierenRequest>

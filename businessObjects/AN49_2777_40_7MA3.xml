@@ -1,0 +1,213 @@
+<AN>
+	<FXP_AN>
+		<SEP>/</SEP>
+		<EndSZ>
+			<LK>49</LK>
+			<NKZ>2777</NKZ>
+			<VPZ>40</VPZ>
+			<FachSZ>7MA3</FachSZ>
+		</EndSZ>
+		<Standorttyp>Inhouse</Standorttyp>
+		<Betriebsstatus>inBetrieb</Betriebsstatus>
+		<Nutzungsstatus>provisionierungstauglich</Nutzungsstatus>
+		<Equipment_nr>100000000001</Equipment_nr>
+		<Materialnummer>10000001</Materialnummer>
+		<Beschaltete_Ports>115</Beschaltete_Ports>
+		<Datenmaster>FXP</Datenmaster>
+		<Mischbestueckung>false</Mischbestueckung>
+		<Enthaelt_Sdsl_Karte>false</Enthaelt_Sdsl_Karte>
+		<Netzumschaltungen_von/>
+		<Netzumschaltungen_bis/>
+		<Flexprod_Kennung>19880122000000000000000000000000000001.MSAN</Flexprod_Kennung>
+		<Anzahl_offene_Auftraege>0</Anzahl_offene_Auftraege>
+		<Anzahl_Linecards>1</Anzahl_Linecards>
+		<Anzahl_Ports>2</Anzahl_Ports>
+		<Anzahl_geparkte_Produkte>0</Anzahl_geparkte_Produkte>
+	</FXP_AN>
+	<ROLLOUT_PLAN>
+		<SEP>_</SEP>
+		<EndszAN>
+			<!-- /AN/FXP_AN/ENDSZ -->
+		</EndszAN>
+		<EndszBNG>
+			<LK>49</LK>
+			<NKZ>221</NKZ>
+			<VPZ>1</VPZ>
+			<FachSZ>7001</FachSZ>
+		</EndszBNG>
+		<HostnameBNG>HOST01</HostnameBNG>
+		<Migrationsszenario>DualHomed</Migrationsszenario>
+		<Solltermin>31.12.2015</Solltermin>
+		<Z900Standort>
+			<!-- ../EndszBNG/z900 -->
+		</Z900Standort>
+		<Region>West</Region>
+		<PTI>PTI21</PTI>
+		<Leitungsbezeichnung>
+			<!-- /AN/RMK_UPLINK/LSZ_0000000001-/AN/FXP_AN/ENDSZ-/AN/ROLLOUT_PLAN/EndszBNG  -->
+		</Leitungsbezeichnung>
+		<EndszAGS1>
+			<LK>49</LK>
+			<NKZ>221</NKZ>
+			<VPZ>12</VPZ>
+			<FachSZ>7JY0</FachSZ>
+		</EndszAGS1>
+		<WmstiBaFa>wmstiBaFa000001</WmstiBaFa>
+		<OnlineOffline>Offline</OnlineOffline>
+	</ROLLOUT_PLAN>
+	<SW_BNG>
+		<Hostname>
+			<!-- /AN/ROLLOUT_PLAN/HostnameBNG -->
+		</Hostname>
+		<Softwarestand>r4.7.005</Softwarestand>
+	</SW_BNG>
+	<SW_AN>
+		<SEP>/</SEP>
+		<Endsz>
+			<!-- /AN/FXP_AN/ENDSZ -->
+		</Endsz>
+		<Softwarestand>r4.7.005</Softwarestand>
+	</SW_AN>
+	<BNG>
+		<SEP>/</SEP>
+		<ENDSZ>
+			<!-- ROLLOUT_PLAN/EndszBNG -->
+		</ENDSZ>
+		<LOGICAL_STATUS>In Service</LOGICAL_STATUS>
+		<PHYSICAL_STATUS>Installed</PHYSICAL_STATUS>
+	</BNG>
+	<RMK_UPLINK>
+		<SEP>_</SEP>
+		<LBZ>
+			<!-- RMK_UPLINK/LSZ_0000000001-EndszAn-EndszBng-->
+		</LBZ>
+		<LSZ>4C1</LSZ>
+		<ANCP_SESSION_STATE/>
+		<LOGICAL_STATUS>In Service</LOGICAL_STATUS>
+		<UPLINK_PORT>
+			<rack>1</rack>
+			<shelf>1</shelf>
+			<slot>5</slot>
+			<sub_slot>0</sub_slot>
+			<port>1</port>
+		</UPLINK_PORT>
+	</RMK_UPLINK>
+	<CRM_T>
+		<CONTRACT_NR>
+			<PRE>VERTRAG-</PRE>
+			<IND>1234</IND>
+		</CONTRACT_NR>
+		<BMP>
+			<CLIENT_NR>
+				<PRE>KDNR-</PRE>
+				<IND>1234567890</IND>
+			</CLIENT_NR>
+			<TNBA_ID>
+				<PRE>TNBA-</PRE>
+				<IND>1234567890</IND>
+			</TNBA_ID>
+			<TO_NR>123456789012</TO_NR>
+			<BKTO>
+				<PRE>BKTO-9876</PRE>
+				<IND>52243210</IND>
+			</BKTO>
+			<ROOTID_EXCHANGE>
+				<PRE>ROOT_AS-</PRE>
+				<IND>1234</IND>
+			</ROOTID_EXCHANGE>
+			<!--<CONTRACT_EXCHANGE>VERTRAG-1234</CONTRACT_EXCHANGE>--><MATERIAL_NUMBER_EXCHANGE>89733977</MATERIAL_NUMBER_EXCHANGE>
+			<ROOTID_ISP>
+				<PRE>ROOT_ISP-</PRE>
+				<IND>1234</IND>
+			</ROOTID_ISP>
+			<CONTRACT_ISP>
+				<PRE>VERTR-ISP-</PRE>
+				<IND>1234</IND>
+			</CONTRACT_ISP>
+			<ISP_MATERIAL_NR>89743066</ISP_MATERIAL_NR>
+			<KLS_ID>
+				<PRE>KLS-</PRE>
+				<IND>1234</IND>
+			</KLS_ID>
+			<STREET>Hauptstrasse</STREET>
+			<LOCATION>Köln</LOCATION>
+			<POSTAL_CODE>50825</POSTAL_CODE>
+			<COUNTRY_CODE>DE</COUNTRY_CODE>
+			<ONKZ>221</ONKZ>
+			<PHONE_NR>123456</PHONE_NR>
+			<HOUSE_NR>5</HOUSE_NR>
+			<ADDITIONAL>a</ADDITIONAL>
+			<UPDATE_STATUS>A</UPDATE_STATUS>
+		</BMP>
+		<ZMP>
+			<ROOT_ID>
+				<PRE>ROOT_AS-</PRE>
+				<IND>1234</IND>
+			</ROOT_ID>
+			<PARENT_ID>
+				<PRE>PARENT-</PRE>
+				<IND>123</IND>
+			</PARENT_ID>
+			<DATASET_ID>
+				<PRE>SATZ-</PRE>
+				<IND>123</IND>
+			</DATASET_ID>
+			<TYPE>T-DSL</TYPE>
+			<SUBTYPE>Consumer</SUBTYPE>
+			<MATERIAL_NR>89752961</MATERIAL_NR>
+			<PRODUCT_NAME>DSL 16 TV ohne Splitter</PRODUCT_NAME>
+			<!--<CONTRACT_NR>VERTRAG-1234</CONTRACT_NR>--><UPDATE_STATUS>A</UPDATE_STATUS>
+		</ZMP>
+	</CRM_T>
+	<FXP_INV>
+		<SEP>/</SEP>
+
+	</FXP_INV>
+	<PSL>
+		<SEP>_</SEP>
+		<ID>99</ID>
+		<PARTNER>BNG_MIGTOOL</PARTNER>
+		<ANFO_KEN>ID_Consumer_2</ANFO_KEN>
+
+		<STAR_ID>1234</STAR_ID>
+		<ADR_ID>1234567</ADR_ID>
+		<GEBA>3</GEBA>
+		<RAUM>4</RAUM>
+		<REIHE>5</REIHE>
+		<PLATZ>1</PLATZ>
+		<ASB>t</ASB>
+		<KVZ>t</KVZ>
+		<S_PKT>t</S_PKT>
+		<IWERK>t</IWERK>
+		<INGRP>t</INGRP>
+		<FLTYP>t</FLTYP>
+		<AUFNR>t</AUFNR>
+		<KTEXT_SM>t</KTEXT_SM>
+	</PSL>
+	<FXP_PROD>
+		<SEP>/</SEP>
+		<produktinstanzID>
+			<IND>1234567890</IND>
+			<SUF>.IP_Service_Plattform</SUF>
+		</produktinstanzID>
+	</FXP_PROD>
+	<LCS>
+		<ELC MATERIAL_NUMBER="40247125" EQUIPMENT_NR="23655654"/>
+		<LC MATERIAL_NUMBER="402471251" EQUIPMENT_NR="236556541">
+			<PORT tnba="TNBA-5584-52e"></PORT>
+			<PORT tnba="TNBA-5584-53e"></PORT>
+			<PORT tnba="TNBA-5584-54e"></PORT>
+			<PORT tnba="TNBA-5584-55e"></PORT>
+			<PORT tnba="TNBA-5584-56e"></PORT>
+			<PORT tnba="TNBA-5584-57e"></PORT>
+			<PORT tnba="TNBA-5584-58e"></PORT>
+		</LC>
+		<LC MATERIAL_NUMBER="402471252" EQUIPMENT_NR="236556542">
+			<PORT tnba="TNBA-5584-59e"></PORT>
+			<PORT tnba="TNBA-5584-60e"></PORT>
+			<PORT tnba="TNBA-5584-61e"></PORT>
+			<PORT tnba="TNBA-5584-62e"></PORT>
+			<PORT tnba="TNBA-5584-63e"></PORT>
+		</LC>
+	</LCS>
+</AN>

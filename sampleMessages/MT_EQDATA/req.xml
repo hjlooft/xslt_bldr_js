@@ -1,0 +1,17 @@
+<ns3:MT_EQDATA_REQ xmlns:ns1="http://messaging.ei.smobile.net/datatypes" xmlns:ns3="http://komlefom.de/xi/NGERP_EXTD_PSL_INT/global/WMS/Equipment/Read">
+    <eiMessageContext>
+        <ns1:sender>GNB_MIG</ns1:sender>
+        <ns1:correlationId>a2b97fa3420341f5b888</ns1:correlationId>
+    </eiMessageContext>
+    <data>
+        <MT_EQDATA_REQ>
+            <KOPF>
+                <PARTNER>BS_mixtool</PARTNER>
+                <ANFO_KEN>a2b97fa3420341f5b888</ANFO_KEN>
+            </KOPF>
+            <EQUI>
+                <SORTIERFELD>49/2777/40/7MA1</SORTIERFELD>
+            </EQUI>
+        </MT_EQDATA_REQ>
+    </data>
+</ns3:MT_EQDATA_REQ>

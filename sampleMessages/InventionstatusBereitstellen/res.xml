@@ -1,0 +1,37 @@
+<ns2:InventionstatusBereitstellenResponse xmlns="http://www.komlefom.de/proxlef/mixtool/basetypes" xmlns:ns2="http://www.komlefom.de/proxlef/mixtool">
+    <ns2:Daten>
+        <EndsuAN>[ENDSU with /]!!!!</EndsuAN>
+        <Betriebsstatus>inBetrieb</Betriebsstatus>
+        <Nutzungsstatus>provisionierungstauglich</Nutzungsstatus>
+        <Equipmentnummer>[Equipmentnummer FPX]!!!!!</Equipmentnummer>
+        <Materialnummer>[Materialnummer FPX]!!!!</Materialnummer>
+        <Typname>[MSAN / DSLAM from proxlef Kennung]!!!!</Typname>
+        <Hersteller>[Hersteller FPX]!!!!</Hersteller>
+        <Typ>[Typ FPX]!!!</Typ>
+        <Domain_Name>ZDCN_5</Domain_Name>
+        <ZDCN_IP_Adresse>169.169.1.1</ZDCN_IP_Adresse>
+        <MAT_ID>[UNIQUE Number]!!!</MAT_ID>
+        <Sperre>
+            <Sperrgrund>KP7Sperre</Sperrgrund>
+            <Prozesse>G1,G2,G3,G5,G10,ChangePort,NMS_Konfiguration</Prozesse>
+            <Notiz>InfoNotizSperre</Notiz>
+            <Beginn>2014-11-09T12:00:00</Beginn>
+            <Ende>2014-11-09T12:00:00</Ende>
+        </Sperre>
+        <Card>
+            <Slotnummer_abs>[109]!!!</Slotnummer_abs>
+            <Typname>Ethernet_Linecard</Typname>
+            <Slotnummer_rel>[9]!!!</Slotnummer_rel>
+            <Nutzungsstatus>provisionierungstauglich</Nutzungsstatus>
+            <Betriebsstatus>inBetrieb</Betriebsstatus>
+            <Equipmentnummer>[123455400012]!!!</Equipmentnummer>
+            <Materialnummer>[40247135]!!!</Materialnummer>
+            <Port>
+                <Portnummer>2</Portnummer>
+                <Typname>Port</Typname>
+                <EthernetLink>false</EthernetLink>
+                <Betriebsstatus>ausserBetrieb</Betriebsstatus>
+            </Port>
+        </Card>
+    </ns2:Daten>
+</ns2:InventionstatusBereitstellenResponse>

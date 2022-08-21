@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>xsltBuilder</title>
+<script type="text/javascript" src="js/xmlUtils.js"></script>
+<script type="text/javascript" src="js/xsltBldrApp.js"></script>
+<script type="text/javascript" src="js/transformers.js"></script>
+<script type="text/javascript" src="js/xmlDocuments.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/xsltBldrApp.ui.js"></script>
+<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+<h1 style="float:left;">xsltBuilder</h1>
+<div id="puffer"></div>
+<div id="btn_bar">
+<div class="btn" id="inputReq_Res" title="Open Textareas for dropping XML messages">リクエスト・レスポンス入力</div> 
+<div class="btn" id="inputDataset" title="Open Textarea for dropping dataset xml">データセット入力</div>
+<div class="btn" id="uuid" title="Add UUID" draggable="true">UUID</div>
+<div class="btn" id="number" title="Add numbering" draggable="true">#</div>
+<div class="btn" id="java_val_to_node" title="Create node based on val" draggable="true">Java</div>
+<div class="btn" id="editXslt" title="Edit the xslt directly">Edit</div>
+<div class="btn" id="loadXslt" title="Edit the xslt directly" onclick="xsltBldrApp.transformTest();">load</div>
+<!--<div class="btn" id="param" title="Runtime Parameters" draggable="true">Param</div>-->
+</div>
+<br style="clear:both;"/>
+<form>
+<div class="div" id="reqContainer">
+<div id="reqHolder"></div>
+<div id="identifier"></div>
+<div id="datasetHolder"></div>
+</div>
+<div class="div" id="resContainer">
+   <div id="resHolder"></div>
+</div>
+<div class="div" id="output"><textarea id="out"></textarea></div>
+</form>
+<div id="inputDatasetXml">
+   <div>
+      <p class="overlayText">Insert own business object data or load sample</p>
+      <label for="btnLoadSampleBusinessObjectData">
+         <button id="btnLoadSampleBusinessObjectData">Load</button>
+      </label>
+   </div>
+   <textarea id="datasetTa"></textarea>
+   <button class="btn" id="btnInputDatasetXml">確定</button>
+</div>
+
+<div id="inputReqResXml">
+   <div style="display:flex; justify-content: space-evenly;">
+      <p class="overlayText" style="margin:8px;">Insert your own sample messages or choose from this select menu:</p>
+      <select id="selOp" style="font-size:22px;">
+         <option value=""></option>
+         <option value="InventionstatusBereitstellen">InventionstatusBereitstellen</option>
+         <option value="readBildDb">readBildDb</option>
+         <option value="updateBildDb">updateBildDb</option>
+         <option value="ExecuteDiagnosticsType">ExecuteDiagnosticsType</option>
+         <option value="setAccessData">setAccessData</option>
+         <option value="mynationCreate">JavaでUUIDを挿入</option>      
+         <option value="GetLineId">GetLineId</option>
+         <option value="MT_EQDATA">MT_EQDATA</option>
+         <option value="ProduktinstanzdatenExportieren">ProduktinstanzdatenExportieren</option>
+         <option value="configureRequest">configureRequest</option>
+      </select>
+   </div>
+   
+   <div style="display:flex; justify-content: space-evenly;">
+      <div class="half_width">
+         <p class="overlayText" style="display: inline;">リクエスト</p>
+         <label for="allNodes" title="By default, same-name subsequent siblings get filtered out in the HTML representation" class="overlayText">
+            <input type="checkbox" id="allNodes">
+            Show all nodes
+         </label>
+         <br>
+         <textarea id="reqTa"></textarea>
+      </div>
+      <div class="half_width">
+         <p class="overlayText" style="display: inline;">レスポンス</p>
+         <br>
+         <textarea id="resTa"></textarea>
+      </div>
+   </div>
+   <button class="btn" id="btnInputReqResXml">確定</button>
+   </div>
+
+</body>
+</html>
