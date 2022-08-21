@@ -57,8 +57,8 @@ xsltBldrApp.addNumbering = function(targetId) {
     var correspondingResultNode = xsltBldrApp.resultXslt.getElementById(targetId);
     while (correspondingResultNode.hasChildNodes())
         correspondingResultNode.childNodes[0].remove();
-    correspondingResultNode.appendChild(xsltTagFactory({ name: "value-of", atrs: [["select", inFormula]] }));
-    markAsDone(targetId);
+    correspondingResultNode.appendChild(app.xsltTagFactory({ name: "value-of", atrs: [["select", inFormula]] }));
+    app.markAsDone(targetId);
 }
 
 xsltBldrApp.processInputReqResMessages = async function (reqStr, resStr) {

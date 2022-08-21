@@ -187,7 +187,7 @@ xsltBldrApp.processDrag = function(targetId) {
 	if (srcId == "uuid") {
 		addUuid(targetId);
 	} else if (srcId == "number") {
-		addNumbering(targetId);
+		app.addNumbering(targetId);
 	} else if (srcId == "lookup") {
 		var exploded2pMapped = tbMapped.split("@");
 		origin = (r = req_id_d.getElementById(explodedSrcId[0])) || (d = dsxml_id_d.getElementById(explodedSrcId[0]));
