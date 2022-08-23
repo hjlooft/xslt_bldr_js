@@ -18,14 +18,14 @@ xsltBldrApp.processInputReqResMessages = async function (reqStr, resStr) {
 	app.req.innerHTML = inReq.documentElement.nodeName;
 	app.res.innerHTML = inRes.documentElement.nodeName;
 
-	xmlReqWithIds = await app.transform("addIdsToNodes", inReq, [{paramName: "filterOnOff", paramValue: (document.getElementById("allNodes").checked) ? "off" : "on"}]);
+	xmlReqWithIds = await app.transform("addIdsToNodes", inReq, [{paramName: "filterOnOff", paramValue: (document.getElementById("allNodes").checked) ? "off" : "on"},{paramName: "doc-role", paramValue: "req"}]);
 
-	req_div_d = await app.transform("xmlToDraggableHtml", xmlReqWithIds, [{paramName: "doc-role", paramValue: "req"}]);
+	req_div_d = await app.transform("xmlToDraggableHtml", xmlReqWithIds);
 	var reqSerialized = app.serializer.serializeToString(req_div_d);
 	document.getElementById("reqHolder").innerHTML = reqSerialized;
 
-	xmlResWithIds = await app.transform("addIdsToNodes", inRes);
-	res_div_d = await app.transform("xmlToDraggableHtml", xmlResWithIds, [{paramName: "doc-role", paramValue: "res"}]);
+	xmlResWithIds = await app.transform("addIdsToNodes", inRes, [{paramName: "doc-role", paramValue: "res"}]);
+	res_div_d = await app.transform("xmlToDraggableHtml", xmlResWithIds);
 	document.getElementById("resHolder").innerHTML = app.serializer.serializeToString(res_div_d);
 
 	document.querySelectorAll('#reqHolder .xmlNodeDiv')
@@ -55,7 +55,7 @@ xsltBldrApp.processInputReqResMessages = async function (reqStr, resStr) {
 	app.addDeclToStylesheet(app.resultXslt);
 
 	app.contrastingColors = app.usedColors.concat(app.contrastingColors);
-	app.dragOrigin = xmlReqWithIds.documentElement;
+	app.xmlNodeCorrespondingToDragOrigin = xmlReqWithIds.documentElement;
 	this.processDrag(xmlResWithIds.documentElement.id);
 	app.displayResult();
 }
@@ -210,7 +210,27 @@ xsltBldrApp.handleDragStart = function(e) {
 	}
 	e.dataTransfer.effectAllowed = 'move';
 //		e.dataTransfer.setData('text/plain', this.id);
-	xsltBldrApp.dragOrigin = this;
+
+    const [nodeId, _ ] = app.xmlNodeCorrespondingToDragOrigin.id.split("@");
+
+    const reqDocDragOrigin = xmlReqWithIds.getElementById(nodeId);
+
+    if (reqDocDragOrigin){
+        xsltBldrApp.xmlNodeCorrespondingToDragOrigin = resDocDragOrigin;
+        this.processReqOriginDrag();
+        return;
+    }
+    
+    const businessDataDragOrigin = xmlReqWithIds.getElementById(nodeId);
+
+    if (businessDataDragOrigin){
+        xsltBldrApp.xmlNodeCorrespondingToDragOrigin = businessDataDragOrigin;
+        this.processBusinessDataOriginDrag();
+        return;
+    }
+
+    throw new Error('Origin node of drag could not be determined.'); 
+
 }
 
 xsltBldrApp.handleDragOver = function(e) {
@@ -254,9 +274,9 @@ xsltBldrApp.handleDropOnDS = function(e) {
 		e.preventDefault();
 	lookupMode = true;
 	console.log("lookupMode " + lookupMode);
-	lookupValReq = xsltBldrApp.dragOrigin;
+	lookupValReq = xsltBldrApp.xmlNodeCorrespondingToDragOrigin;
 	lookupValDS = e.target.id;
-	console.log(xsltBldrApp.dragOrigin.id, e.target.id);
+	console.log(xsltBldrApp.xmlNodeCorrespondingToDragOrigin.id, e.target.id);
 	return false;
 }
 
@@ -281,7 +301,7 @@ xsltBldrApp.handleIdentDiv = function (e) {
     }
     if (e.preventDefault)
         e.preventDefault();
-    const dragOriginCorrespondingReqXmlElement = xmlReqWithIds.getElementById(xsltBldrApp.dragOrigin.id);
+    const xmlNodeCorrespondingToDragOriginCorrespondingReqXmlElement = xmlReqWithIds.getElementById(xsltBldrApp.xmlNodeCorrespondingToDragOrigin.id);
     // if (!el) {
     // 	console.log("not valid el");
     // 	return;
@@ -296,10 +316,10 @@ xsltBldrApp.handleIdentDiv = function (e) {
             xsltBldrApp.resultXslt.documentElement.childNodes[0]);
     if (!xsltBldrApp.resultXslt.getElementById("identNode")) {
         xsltBldrApp.resultXslt.documentElement.insertBefore(
-            xsltTagFactory({ name: "variable", atrs: [["name", "identNode"], ["id", "identNode"], ["select", xmlUtils.getXPathForElement(dragOriginCorrespondingReqXmlElement, xmlReqWithIds)]] }),
+            xsltTagFactory({ name: "variable", atrs: [["name", "identNode"], ["id", "identNode"], ["select", xmlUtils.getXPathForElement(xmlNodeCorrespondingToDragOriginCorrespondingReqXmlElement, xmlReqWithIds)]] }),
             xsltBldrApp.resultXslt.documentElement.childNodes[0]);
     } else {
-        xsltBldrApp.resultXslt.getElementById("identNode").setAttribute("select", xmlUtils.getXPathForElement(dragOriginCorrespondingReqXmlElement, xmlReqWithIds));
+        xsltBldrApp.resultXslt.getElementById("identNode").setAttribute("select", xmlUtils.getXPathForElement(xmlNodeCorrespondingToDragOriginCorrespondingReqXmlElement, xmlReqWithIds));
     }
 
     xsltBldrApp.evalFilenameFormula();

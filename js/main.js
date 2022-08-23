@@ -1,6 +1,6 @@
 xsltBldrApp.resultXslt = document.implementation.createDocument(xsltBldrApp.namespaces["xslt"], "xsl:stylesheet");
 
-xsltBldrApp.dragOrigin = null;
+xsltBldrApp.xmlNodeCorrespondingToDragOrigin = null;
 
 
 xsltBldrApp.sendTransformRequest = async () => {
@@ -168,8 +168,6 @@ xsltBldrApp.processDrag = function(targetId) {
 
 	const app = this; 
 	const targetNode = xmlResWithIds.getElementById(targetId);
-	const explodedSrcId = app.dragOrigin.id.split("@");
-	const origin = (r = xmlReqWithIds.getElementById(explodedSrcId[0])) || (dsxml_id_d && (d = dsxml_id_d.getElementById(explodedSrcId[0]))) || null;
 
 	if (r)
 		lookupMode = false;
@@ -182,7 +180,7 @@ xsltBldrApp.processDrag = function(targetId) {
 		return;
 	}
 
-	const srcId = app.dragOrigin.id;
+	const srcId = app.xmlNodeCorrespondingToDragOrigin.id;
 
 	if (srcId == "uuid") {
 		addUuid(targetId);
@@ -220,7 +218,7 @@ xsltBldrApp.processDrag = function(targetId) {
 		if (origin.parentNode.nodeType != 9 || !r) {
 			var parTemplMatch = xmlUtils.findTemplateParent(correspondingResultNode.parentNode, "");
 
-			var templ2bApplied = xmlUtils.getTempl2bApplied(app.dragOrigin, parTemplMatch, (r != null), explodedSrcId[1] ? explodedSrcId[1] : null, app.resultXslt);
+			var templ2bApplied = xmlUtils.getTempl2bApplied(app.xmlNodeCorrespondingToDragOrigin, parTemplMatch, (r != null), explodedSrcId[1] ? explodedSrcId[1] : null, app.resultXslt);
 
 
 			//java_vtn_mode = java_vtn.className.indexOf("depressed") != -1;
@@ -253,7 +251,7 @@ xsltBldrApp.processDrag = function(targetId) {
 				var aplTempl = app.xsltTagFactory(
 					{
 						name: "apply-templates",
-						atrs: [["select", app.templ2bApplied]]
+						atrs: [["select", templ2bApplied]]
 					});
 				correspondingResultNode.parentNode.insertBefore(aplTempl,
 					correspondingResultNode);

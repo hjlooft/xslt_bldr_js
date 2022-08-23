@@ -1,6 +1,6 @@
 var resultXslt;
 
-xsltBldrApp.dragOrigin = null;
+xsltBldrApp.xmlNodeCorrespondingToDragOrigin = null;
 
 xsltBldrApp.xmlDocuments = {
 	docs: {},
@@ -373,7 +373,7 @@ window.onload = function () {
 		addDeclToStylesheet(resultXslt);
 
 		xsltBldrApp.contrastingColors = xsltBldrApp.usedColors.concat(xsltBldrApp.contrastingColors);
-		xsltBldrApp.dragOrigin = req_id_d.documentElement;
+		xsltBldrApp.xmlNodeCorrespondingToDragOrigin = req_id_d.documentElement;
 		processDrag(res_id_d.documentElement.id);
 		displayResult();
 	}
@@ -427,7 +427,7 @@ window.onload = function () {
 	function processDrag(targetId) {
 
 		var targetNode = res_id_d.getElementById(targetId);
-		var explodedSrcId = xsltBldrApp.dragOrigin.id.split("@");
+		var explodedSrcId = xsltBldrApp.xmlNodeCorrespondingToDragOrigin.id.split("@");
 		var origin = (r = req_id_d.getElementById(explodedSrcId[0])) || (dsxml_id_d && (d = dsxml_id_d.getElementById(explodedSrcId[0]))) || null;
 
 		if (r)
@@ -441,7 +441,7 @@ window.onload = function () {
 			return;
 		}
 
-		const srcId = xsltBldrApp.dragOrigin.id;
+		const srcId = xsltBldrApp.xmlNodeCorrespondingToDragOrigin.id;
 
 		if (srcId == "uuid") {
 			addUuid(targetId);
@@ -561,7 +561,7 @@ window.onload = function () {
 		}
 		e.dataTransfer.effectAllowed = 'move';
 //		e.dataTransfer.setData('text/plain', this.id);
-		xsltBldrApp.dragOrigin = this;
+		xsltBldrApp.xmlNodeCorrespondingToDragOrigin = this;
 	}
 
 	function handleDragOver(e) {
@@ -605,9 +605,9 @@ window.onload = function () {
 			e.preventDefault();
 		lookupMode = true;
 		console.log("lookupMode " + lookupMode);
-		lookupValReq = xsltBldrApp.dragOrigin;
+		lookupValReq = xsltBldrApp.xmlNodeCorrespondingToDragOrigin;
 		lookupValDS = e.target.id;
-		console.log(xsltBldrApp.dragOrigin.id, e.target.id);
+		console.log(xsltBldrApp.xmlNodeCorrespondingToDragOrigin.id, e.target.id);
 		return false;
 	}
 
@@ -784,7 +784,7 @@ window.onload = function () {
 		}
 		if (e.preventDefault)
 			e.preventDefault();
-		const dragOriginCorrespondingReqXmlElement = req_id_d.getElementById(xsltBldrApp.dragOrigin.id);
+		const xmlNodeCorrespondingToDragOriginCorrespondingReqXmlElement = req_id_d.getElementById(xsltBldrApp.xmlNodeCorrespondingToDragOrigin.id);
 		// if (!el) {
 		// 	console.log("not valid el");
 		// 	return;
@@ -799,10 +799,10 @@ window.onload = function () {
 				resultXslt.documentElement.childNodes[0]);
 		if (!resultXslt.getElementById("identNode")) {
 			resultXslt.documentElement.insertBefore(
-				xsltTagFactory({ name: "variable", atrs: [["name", "identNode"], ["id", "identNode"], ["select", xmlUtils.getXPathForElement(dragOriginCorrespondingReqXmlElement, req_id_d)]] }),
+				xsltTagFactory({ name: "variable", atrs: [["name", "identNode"], ["id", "identNode"], ["select", xmlUtils.getXPathForElement(xmlNodeCorrespondingToDragOriginCorrespondingReqXmlElement, req_id_d)]] }),
 				resultXslt.documentElement.childNodes[0]);
 		} else {
-			resultXslt.getElementById("identNode").setAttribute("select", xmlUtils.getXPathForElement(dragOriginCorrespondingReqXmlElement, req_id_d));
+			resultXslt.getElementById("identNode").setAttribute("select", xmlUtils.getXPathForElement(xmlNodeCorrespondingToDragOriginCorrespondingReqXmlElement, req_id_d));
 		}
 
 		evalFilenameFormula();
