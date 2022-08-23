@@ -113,7 +113,7 @@ xsltBldrApp.initUi = function(){
 		document.getElementById("editXslt").addEventListener("click", function () {
 		if (this.className.indexOf("depressed") == -1) {
 			this.classList.add("depressed");
-			xsltBldrApp.transformers.indentTransf.setParameter(null, "noFilter", "true");
+			xsltBldrApp.transformers.indentTransf.setParameter(null, "filtered", "false");
 			var pretty = xsltBldrApp.transformers.indentTransf.transformToDocument(xsltBldrApp.resultXslt);
 			addDeclToStylesheet(pretty);
 			outPanel.value = xsltBldrApp.serializer.serializeToString(pretty);
@@ -128,7 +128,7 @@ xsltBldrApp.initUi = function(){
 			this.classList.remove("depressed");
 			resultView = false;
 			displayTransResult();
-			/*xsltBldrApp.transformers.indentTransf.setParameter(null,"noFilter","false");
+			/*xsltBldrApp.transformers.indentTransf.setParameter(null,"filtered", "true");
 			document.getElementById("out").value =
 			xsltBldrApp.serializer.serializeToString(xsltBldrApp.transformers.templDividerTransf.transformToDocument(xsltBldrApp.transformers.indentTransf.transformToDocument(xsltBldrApp.resultXslt)));
 			resultView = false;*/

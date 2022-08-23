@@ -1,16 +1,16 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <xsl:output method="xml" indent="yes"/>
-    <xsl:param name="noFilter"/>
+    <xsl:param name="filtered"/>
     <xsl:param name="indent-increment" select="'   '" />
     <xsl:template match="*">
         <xsl:param name="indent" select="'&#xA;'"/>
         <xsl:value-of select="$indent"/>
         <xsl:copy>
             <xsl:choose>
-                <xsl:when test="$noFilter='false'">
-                    <xsl:copy-of select="@*[name()!='id' and name()!='fakeDocFn' and name()!='gl_param']" />
+                <xsl:when test="$filtered='true'">
+                    <xsl:copy-of select="@*[name()!='id']" />
                 </xsl:when>
-                <xsl:when test="$noFilter='true'">
+                <xsl:when test="$filtered='false'">
                     <xsl:copy-of select="@*"/>
                 </xsl:when>
             </xsl:choose>

@@ -5,6 +5,61 @@ xsltBldrApp.xmlDocuments = {
 	} 
 };
 
+xsltBldrApp.processInputReqResMessages = async function (reqStr, resStr) {
+    const app = xsltBldrApp;
+	app.ident.textContent = "";
+	documentEls2bReplaced = []; //fake document() related
+	inReq = app.parser.parseFromString(reqStr, "text/xml");
+	inRes = app.parser.parseFromString(resStr, "text/xml");
+
+	app.xmlDocuments.registerXmlDocumentFromString('req', reqStr);
+	app.xmlDocuments.registerXmlDocumentFromString('res', resStr);
+
+	app.req.innerHTML = inReq.documentElement.nodeName;
+	app.res.innerHTML = inRes.documentElement.nodeName;
+
+	xmlReqWithIds = await app.transform("addIdsToNodes", inReq, [{paramName: "filterOnOff", paramValue: (document.getElementById("allNodes").checked) ? "off" : "on"}]);
+
+	req_div_d = await app.transform("xmlToDraggableHtml", xmlReqWithIds, [{paramName: "doc-role", paramValue: "req"}]);
+	var reqSerialized = app.serializer.serializeToString(req_div_d);
+	document.getElementById("reqHolder").innerHTML = reqSerialized;
+
+	xmlResWithIds = await app.transform("addIdsToNodes", inRes);
+	res_div_d = await app.transform("xmlToDraggableHtml", xmlResWithIds, [{paramName: "doc-role", paramValue: "res"}]);
+	document.getElementById("resHolder").innerHTML = app.serializer.serializeToString(res_div_d);
+
+	document.querySelectorAll('#reqHolder .xmlNodeDiv')
+			.forEach(function (xmlNodeDiv)
+				{
+					xmlNodeDiv.addEventListener('dragstart', app.handleDragStart, false);
+					xmlNodeDiv.addEventListener('dragend', app.handleDragEnd, false);
+					xmlNodeDiv.addEventListener('dblclick', app.tglCollapse, false);
+				}
+			);
+
+	document.querySelectorAll('#resHolder .xmlNodeDiv')
+		.forEach(function (xmlNodeDiv) {
+			xmlNodeDiv.addEventListener('dragstart', app.handleDragStart, false);
+			xmlNodeDiv.addEventListener('dragenter', app.handleDragEnter, false);
+			xmlNodeDiv.addEventListener('dragover', app.handleDragOver, false);
+			xmlNodeDiv.addEventListener('dragleave', app.handleDragLeave, false);
+			xmlNodeDiv.addEventListener('drop', app.handleDrop, false);
+			xmlNodeDiv.addEventListener('dragend', app.handleDragEnd, false);
+			xmlNodeDiv.addEventListener('dblclick', app.tglCollapse, false);
+		}
+	);
+
+	//create result XSLT document and documentElement
+	app.resultXslt = document.implementation.createDocument(app.namespaces["xslt"], "xsl:stylesheet");
+
+	app.addDeclToStylesheet(app.resultXslt);
+
+	app.contrastingColors = app.usedColors.concat(app.contrastingColors);
+	app.dragOrigin = xmlReqWithIds.documentElement;
+	this.processDrag(xmlResWithIds.documentElement.id);
+	app.displayResult();
+}
+
 
 xsltBldrApp.tglCollapse = function(e) {
     if (e.stopPropagation) {
@@ -25,7 +80,7 @@ xsltBldrApp.tglCollapse = function(e) {
 
 xsltBldrApp.displayResult = async function() {
 
-    const xmlDocIndented = await xsltBldrApp.transform('indent', xsltBldrApp.resultXslt, [{paramName: "noFilter", paramValue: "false"}])
+    const xmlDocIndented = await xsltBldrApp.transform('indent', xsltBldrApp.resultXslt, [{paramName: "filtered", paramValue: "true"}])
 
     const xmlDocIndentedTemplatesDivided = await xsltBldrApp.transform("templDivider", xmlDocIndented);
 
@@ -60,62 +115,6 @@ xsltBldrApp.addNumbering = function(targetId) {
     correspondingResultNode.appendChild(app.xsltTagFactory({ name: "value-of", atrs: [["select", inFormula]] }));
     app.markAsDone(targetId);
 }
-
-xsltBldrApp.processInputReqResMessages = async function (reqStr, resStr) {
-    const app = xsltBldrApp;
-	app.ident.textContent = "";
-	documentEls2bReplaced = []; //fake document() related
-	inReq = app.parser.parseFromString(reqStr, "text/xml");
-	inRes = app.parser.parseFromString(resStr, "text/xml");
-
-	app.xmlDocuments.registerXmlDocumentFromString('req', reqStr);
-	app.xmlDocuments.registerXmlDocumentFromString('res', resStr);
-
-	app.req.innerHTML = inReq.documentElement.nodeName;
-	app.res.innerHTML = inRes.documentElement.nodeName;
-
-	req_id_d = await app.transform("addIdsToNodes", inReq, [{paramName: "filterOnOff", paramValue: (document.getElementById("allNodes").checked) ? "off" : "on"}]);
-
-	req_div_d = await app.transform("xmlToDraggableHtml", req_id_d, [{paramName: "doc-role", paramValue: "req"}]);
-	var reqSerialized = app.serializer.serializeToString(req_div_d);
-	document.getElementById("reqHolder").innerHTML = reqSerialized;
-
-	res_id_d = await app.transform("addIdsToNodes", inRes);
-	res_div_d = await app.transform("xmlToDraggableHtml", res_id_d, [{paramName: "doc-role", paramValue: "req"}]);
-	document.getElementById("resHolder").innerHTML = app.serializer.serializeToString(res_div_d);
-
-	document.querySelectorAll('#reqHolder .xmlNodeDiv')
-			.forEach(function (xmlNodeDiv)
-				{
-					xmlNodeDiv.addEventListener('dragstart', app.handleDragStart, false);
-					xmlNodeDiv.addEventListener('dragend', app.handleDragEnd, false);
-					xmlNodeDiv.addEventListener('dblclick', app.tglCollapse, false);
-				}
-			);
-
-	document.querySelectorAll('#resHolder .xmlNodeDiv')
-		.forEach(function (xmlNodeDiv) {
-			xmlNodeDiv.addEventListener('dragstart', app.handleDragStart, false);
-			xmlNodeDiv.addEventListener('dragenter', app.handleDragEnter, false);
-			xmlNodeDiv.addEventListener('dragover', app.handleDragOver, false);
-			xmlNodeDiv.addEventListener('dragleave', app.handleDragLeave, false);
-			xmlNodeDiv.addEventListener('drop', app.handleDrop, false);
-			xmlNodeDiv.addEventListener('dragend', app.handleDragEnd, false);
-			xmlNodeDiv.addEventListener('dblclick', app.tglCollapse, false);
-		}
-	);
-
-	//create result XSLT document and documentElement
-	app.resultXslt = document.implementation.createDocument(app.namespaces["xslt"], "xsl:stylesheet");
-
-	app.addDeclToStylesheet(app.resultXslt);
-
-	app.contrastingColors = app.usedColors.concat(app.contrastingColors);
-	app.dragOrigin = req_id_d.documentElement;
-	this.processDrag(res_id_d.documentElement.id);
-	app.displayResult();
-}
-
 
 xsltBldrApp.addPref2bExcluded = function(atrName, prefixName) {
     if (xsltBldrApp.resultXslt.documentElement.getAttribute(atrName)) {
@@ -282,7 +281,7 @@ xsltBldrApp.handleIdentDiv = function (e) {
     }
     if (e.preventDefault)
         e.preventDefault();
-    const dragOriginCorrespondingReqXmlElement = req_id_d.getElementById(xsltBldrApp.dragOrigin.id);
+    const dragOriginCorrespondingReqXmlElement = xmlReqWithIds.getElementById(xsltBldrApp.dragOrigin.id);
     // if (!el) {
     // 	console.log("not valid el");
     // 	return;
@@ -297,10 +296,10 @@ xsltBldrApp.handleIdentDiv = function (e) {
             xsltBldrApp.resultXslt.documentElement.childNodes[0]);
     if (!xsltBldrApp.resultXslt.getElementById("identNode")) {
         xsltBldrApp.resultXslt.documentElement.insertBefore(
-            xsltTagFactory({ name: "variable", atrs: [["name", "identNode"], ["id", "identNode"], ["select", xmlUtils.getXPathForElement(dragOriginCorrespondingReqXmlElement, req_id_d)]] }),
+            xsltTagFactory({ name: "variable", atrs: [["name", "identNode"], ["id", "identNode"], ["select", xmlUtils.getXPathForElement(dragOriginCorrespondingReqXmlElement, xmlReqWithIds)]] }),
             xsltBldrApp.resultXslt.documentElement.childNodes[0]);
     } else {
-        xsltBldrApp.resultXslt.getElementById("identNode").setAttribute("select", xmlUtils.getXPathForElement(dragOriginCorrespondingReqXmlElement, req_id_d));
+        xsltBldrApp.resultXslt.getElementById("identNode").setAttribute("select", xmlUtils.getXPathForElement(dragOriginCorrespondingReqXmlElement, xmlReqWithIds));
     }
 
     xsltBldrApp.evalFilenameFormula();

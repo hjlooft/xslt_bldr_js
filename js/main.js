@@ -116,7 +116,7 @@ xsltBldrApp.displayTransResult = function () {
 	request.onload = function () {
 		console.log("got something back!");
 
-		xsltBldrApp.transformers.indentTransf.setParameter(null, "noFilter", "false");
+		xsltBldrApp.transformers.indentTransf.setParameter(null, "filtered","true");
 
 		outPanel.value = xsltBldrApp.serializer.serializeToString(
 			xsltBldrApp.transformers.indentTransf.transformToDocument(
@@ -139,8 +139,8 @@ var i = 0;
 var inReq;
 var ds_xml;
 var inRes;
-var req_id_d;
-var res_id_d;
+var xmlReqWithIds;
+var xmlResWithIds;
 var req_div_d;
 var res_div_d;
 var dsxml_id_d;
@@ -167,9 +167,9 @@ xsltBldrApp.markAsDone = function(tar, src) {
 xsltBldrApp.processDrag = function(targetId) {
 
 	const app = this; 
-	const targetNode = res_id_d.getElementById(targetId);
+	const targetNode = xmlResWithIds.getElementById(targetId);
 	const explodedSrcId = app.dragOrigin.id.split("@");
-	const origin = (r = req_id_d.getElementById(explodedSrcId[0])) || (dsxml_id_d && (d = dsxml_id_d.getElementById(explodedSrcId[0]))) || null;
+	const origin = (r = xmlReqWithIds.getElementById(explodedSrcId[0])) || (dsxml_id_d && (d = dsxml_id_d.getElementById(explodedSrcId[0]))) || null;
 
 	if (r)
 		lookupMode = false;
@@ -190,7 +190,7 @@ xsltBldrApp.processDrag = function(targetId) {
 		app.addNumbering(targetId);
 	} else if (srcId == "lookup") {
 		var exploded2pMapped = tbMapped.split("@");
-		origin = (r = req_id_d.getElementById(explodedSrcId[0])) || (d = dsxml_id_d.getElementById(explodedSrcId[0]));
+		origin = (r = xmlReqWithIds.getElementById(explodedSrcId[0])) || (d = dsxml_id_d.getElementById(explodedSrcId[0]));
 		var prop2bMapped = exploded2pMapped[1] || origin.nodeName;
 		if (exploded2pMapped[1])
 			prop2bMapped = "@" + prop2bMapped;
@@ -210,7 +210,7 @@ xsltBldrApp.processDrag = function(targetId) {
 		);
 
 		if (origin.parentNode.nodeType == 9 && r) {
-			var clonedDocEl = res_id_d.documentElement.cloneNode(true);
+			var clonedDocEl = xmlResWithIds.documentElement.cloneNode(true);
 			templ.appendChild(clonedDocEl);
 			xsltBldrApp.resultXslt.documentElement.appendChild(templ);
 		}
@@ -307,7 +307,7 @@ function processLookup(lookedupValDS, t) {
 	var a = commonAnchestor[1].join("/");
 	var b = commonAnchestor[2].join("/");
 
-	var templ2bApplied = xmlUtils.getTempl2bApplied(req_id_d.getElementById(lookupValReq),
+	var templ2bApplied = xmlUtils.getTempl2bApplied(xmlReqWithIds.getElementById(lookupValReq),
 		xmlUtils.findTemplateParent(xsltBldrApp.resultXslt.getElementById(t)), true, null);
 	//console.log(xmlUtils.getTempl2bApplied(commonAnchestor[0],"foo",false,null)+"["+a+"=current()/"+templ2bApplied+"]/"+b);
 	var target = xsltBldrApp.resultXslt.getElementById(t);
