@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-	<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+	<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:hjl="https://github.com/hjlooft/xsltBldr2015">
 		<xsl:strip-space elements="*"/>
 		<xsl:param name="filterOnOff" select="'on'"/>
 		<xsl:param name="doc-role"></xsl:param>
@@ -11,7 +11,7 @@
 		<xsl:template match="node()">
 			<xsl:if test="(name(.) and not(preceding-sibling::*[name()=name(current())])) or $filterOnOff='off'">
 				<xsl:copy>
-					<xsl:attribute name="id">
+					<xsl:attribute name="hjl:id">
 						<xsl:value-of select="concat($doc-role,'_',generate-id())"/>
 					</xsl:attribute>
 					<xsl:if test="$filterOnOff='on'">

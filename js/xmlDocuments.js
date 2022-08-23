@@ -129,9 +129,9 @@ xsltBldrApp.setDataset = async function (set) {
     const app = this;
 	const inSet = (typeof set == "object") ? set.target.value : set;
 	ds_xml = this.parser.parseFromString(inSet, "text/xml");
-	dsxml_id_d = await this.transform("addIdsToNodes", ds_xml);
+	dsxml_id_d = await this.transform("addIdsToNodes", ds_xml, [{paramName: "doc-role", paramValue: "business-object"}]);
 
-	app.ds.innerHTML = await this.serializer.serializeToString(await this.transform("xmlToDraggableHtml", dsxml_id_d, [{paramName: "doc-role", paramValue: "business-object"}]));
+	app.ds.innerHTML = await this.serializer.serializeToString(await this.transform("xmlToDraggableHtml", dsxml_id_d));
 
 	document.querySelectorAll('#datasetHolder .xmlNodeDiv')
 		.forEach(function (xmlNodeDiv) {
@@ -217,7 +217,6 @@ xsltBldrApp.handleDragStart = function(e) {
 
     if (reqDocDragOrigin){
         xsltBldrApp.xmlNodeCorrespondingToDragOrigin = reqDocDragOrigin;
-        app.processReqOriginDrag();
         return;
     }
     
@@ -261,7 +260,7 @@ xsltBldrApp.handleDrop = function(e) {
 	if (e.stopPropagation) {
 		e.stopPropagation(); // stops the browser from redirecting.
 	}
-	xsltBldrApp.processDrag(e.target.id);
+    xsltBldrApp.processReqOriginDrag(e.target.id);
 	return false;
 }
 

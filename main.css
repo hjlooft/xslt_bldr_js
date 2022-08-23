@@ -116,7 +116,6 @@ body {
 }
 
 #inputReqResXml, #inputDatasetXml {
-	/* display: none; */
 	position: absolute;
 	background-color: rgba(0,0,0,.7);
 	top: 0px;
@@ -126,7 +125,12 @@ body {
 	right:0;
 	text-align: center;
 	/* padding: 3% 0%; */
-}			
+}
+
+#inputDatasetXml {
+	display: none;
+}
+
 #inputReqResXml textarea {
 	width: 45vw;
 	height: 80vh;
