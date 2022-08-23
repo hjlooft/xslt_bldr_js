@@ -56,7 +56,7 @@ xsltBldrApp.processInputReqResMessages = async function (reqStr, resStr) {
 
 	app.contrastingColors = app.usedColors.concat(app.contrastingColors);
 	app.xmlNodeCorrespondingToDragOrigin = xmlReqWithIds.documentElement;
-	this.processDrag(xmlResWithIds.documentElement.id);
+	this.processReqOriginDrag(xmlResWithIds.documentElement.id);
 	app.displayResult();
 }
 
@@ -216,8 +216,8 @@ xsltBldrApp.handleDragStart = function(e) {
     const reqDocDragOrigin = xmlReqWithIds.getElementById(nodeId);
 
     if (reqDocDragOrigin){
-        xsltBldrApp.xmlNodeCorrespondingToDragOrigin = resDocDragOrigin;
-        this.processReqOriginDrag();
+        xsltBldrApp.xmlNodeCorrespondingToDragOrigin = reqDocDragOrigin;
+        app.processReqOriginDrag();
         return;
     }
     

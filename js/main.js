@@ -164,6 +164,78 @@ xsltBldrApp.markAsDone = function(tar, src) {
 	}
 }
 
+xsltBldrApp.processReqOriginDrag = function(targetId){
+
+	const app = xsltBldrApp;
+	const origin = xsltBldrApp.xmlNodeCorrespondingToDragOrigin;
+
+	var templ = app.xsltTagFactory(
+		{
+			name: "template",
+			atrs: [["match", xmlUtils.qName(origin, app.resultXslt)]]
+		}
+	);
+
+	if (origin.parentNode.nodeType == 9) {
+		var clonedDocEl = xmlResWithIds.documentElement.cloneNode(true);
+		templ.appendChild(clonedDocEl);
+		app.resultXslt.documentElement.appendChild(templ);
+	}
+
+	var correspondingResultNode = app.resultXslt.getElementById(targetId);
+
+	if (origin.parentNode.nodeType != 9) {
+		var parTemplMatch = xmlUtils.findTemplateParent(correspondingResultNode.parentNode, "");
+
+		var templ2bApplied = xmlUtils.getTempl2bApplied(app.xmlNodeCorrespondingToDragOrigin, parTemplMatch, false, explodedSrcId[1] ? explodedSrcId[1] : null, app.resultXslt);
+
+		if (targetNode.childNodes[0].nodeType == 1) {
+			var aplTempl = app.xsltTagFactory(
+				{
+					name: "apply-templates",
+					atrs: [["select", templ2bApplied]]
+				});
+			correspondingResultNode.parentNode.insertBefore(aplTempl,
+				correspondingResultNode);
+
+			templ.appendChild(correspondingResultNode);
+			app.resultXslt.documentElement.appendChild(templ);
+		} // target is not a node container, but a value container
+		else {
+			var correspondingResultNode = app.resultXslt.getElementById(targetId);
+			while (correspondingResultNode.hasChildNodes())
+				correspondingResultNode.childNodes[0].remove();
+			var atrs = [["select", app.templ2bApplied]];
+			correspondingResultNode.appendChild(app.xsltTagFactory({ name: "value-of", atrs }));
+		}
+	}
+	app.markAsDone(targetId, origin.id);
+
+	function addXPaths(o, t, x) {
+		[].forEach.call(t.childNodes, function (t_c) {
+			var match = null;
+			[].forEach.call(o.childNodes, function (o_c) {
+				if (o_c.localName == t_c.localName)
+					match = o_c;
+			});
+			if (match && t_c.childNodes[0] && (t_c.childNodes[0].nodeType == 3 || t_c.childNodes[0].nodeName == "xsl:value-of")) {
+				while (t_c.hasChildNodes())
+					t_c.childNodes[0].remove();
+				app.appendXsltChild(t_c, { name: "value-of", atrs: [["select", (x + "/" + xmlUtils.qName(t_c, app.resultXslt)).replace(/^\//, "")]] });
+				app.markAsDone(t_c.id, match.id);
+			}
+			if (match && match.childNodes[0] && match.childNodes[0].nodeType == 1 && t_c.childNodes[0] && t_c.childNodes[0].nodeType == 1) {
+				addXPaths(match, t_c, x + "/" + xmlUtils.qName(t_c, app.resultXslt));
+				//app.markAsDone(t_c.id,match.id);
+			}
+		})
+	}
+	addXPaths(origin, correspondingResultNode, "");
+
+	app.displayResult(xsltBldrApp.resultXslt);
+
+};
+
 xsltBldrApp.processDrag = function(targetId) {
 
 	const app = this; 
